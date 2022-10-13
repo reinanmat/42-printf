@@ -6,26 +6,33 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 15:39:28 by revieira          #+#    #+#             */
-/*   Updated: 2022/10/13 13:34:27 by revieira         ###   ########.fr       */
+/*   Updated: 2022/10/13 19:04:44 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdarg.h>
+#include "ft_printf.h"
 
-static int	check_after_percent(char *str, va_list args)
+static int	check_after_percent(const char *str, va_list args)
 {
 	int		bytes_writes;
-	char	car;
 
 	bytes_writes = 0;
-	str++;
 	if (*str == 'c')
-	{
-		car = va_arg(args, int);
-		bytes_writes = write(1, &car, 1);
-	}
+		bytes_writes = ft_putchar(va_arg(args, int));
+	else if (*str == 's')
+		bytes_writes = ft_putstr(va_arg(args, char *));
+	else if (*str == 'd' || *str == 'i')
+		bytes_writes = ft_putnbr(va_arg(args, int));
+	/*else if (*str == 'p')
+	 * bytes_writes =*/
+	else if (*str == 'u')
+		bytes_writes = ft_putnbr_unsigned(va_arg(args, unsigned int));
+	else if (*str == 'x')
+		bytes_writes = convert_hex_lower(va_arg(args, int));
+	else if (*str == 'X')
+		bytes_writes = convert_hex_upper(va_arg(args, int));
+	else if (*str == '%')
+		bytes_writes = ft_putchar('%');
 	return (bytes_writes);
 }
 
@@ -40,11 +47,11 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			bytes_writes += check_after_percent((char *)format, args);
 			format++;
+			bytes_writes += check_after_percent(format, args);
 		}
 		else
-			bytes_writes += write(1, &(*format), 1);
+			bytes_writes += ft_putchar(*format);
 		format++;
 	}
 	return (bytes_writes);
@@ -52,11 +59,15 @@ int	ft_printf(const char *format, ...)
 
 int	main(void)
 {
-	int	i;
-	int	c;
+	int		i1;
+	int		i2;
+	int		c;
+	char	*str;
 
+	str = NULL;
 	c = 'd';
-	i = ft_printf("algo%calgo\n", c);
-	printf("%d\n", i);
+	i1 = ft_printf("num: %u\n", 999999999);
+	i2 = printf("num: %u\n", 999999999);
+	printf("minha função: %d\nFunção orginal: %d", i1, i2);
 	return (0);
 }
