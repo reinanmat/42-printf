@@ -6,31 +6,11 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 14:23:03 by revieira          #+#    #+#             */
-/*   Updated: 2022/10/13 19:02:45 by revieira         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:20:00 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	ft_putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-
-int	ft_putstr(char *str)
-{
-	int	bytes_writes;
-
-	bytes_writes = 0;
-	if (!str)
-		return (ft_putstr("(null)"));
-	while (*str)
-	{
-		bytes_writes += ft_putchar(*str);
-		str++;
-	}
-	return (bytes_writes);
-}
 
 int	ft_putnbr_unsigned(unsigned int n)
 {
@@ -38,7 +18,7 @@ int	ft_putnbr_unsigned(unsigned int n)
 
 	bytes_writes = 0;
 	if (n < 10)
-		bytes_writes += ft_putchar(n + 48);
+		bytes_writes += ft_print_char(n + 48);
 	else
 	{
 		bytes_writes += ft_putnbr_unsigned(n / 10);
@@ -56,11 +36,11 @@ int	ft_putnbr(int n)
 		return (write(1, "-2147483648", 11));
 	else if (n < 0)
 	{
-		bytes_writes += ft_putchar('-');
+		bytes_writes += ft_print_char('-');
 		n *= -1;
 	}
 	if (n < 10)
-		bytes_writes += ft_putchar(n + 48);
+		bytes_writes += ft_print_char(n + 48);
 	else
 	{
 		bytes_writes += ft_putnbr(n / 10);
@@ -69,16 +49,16 @@ int	ft_putnbr(int n)
 	return (bytes_writes);
 }
 
-int	convert_hex_upper(int n)
+int	convert_hex_upper(unsigned long n)
 {
-	char	str[10];
+	char	str[64];
 	int		temp;
 	int		i;
 
 	i = n;
 	temp = 0;
 	if (n == 0)
-		return (ft_putchar('0'));
+		return (ft_print_char('0'));
 	while (i != 0)
 	{
 		i /= 16;
@@ -95,19 +75,19 @@ int	convert_hex_upper(int n)
 			str[--i] = temp + 55;
 		n /= 16;
 	}
-	return (ft_putstr(str));
+	return (ft_print_str(str));
 }
 
-int	convert_hex_lower(int n)
+int	convert_hex_lower(unsigned long n)
 {
-	char	str[10];
+	char	str[64];
 	int		temp;
 	int		i;
 
 	i = n;
 	temp = 0;
 	if (n == 0)
-		return (ft_putchar('0'));
+		return (ft_print_char('0'));
 	while (i != 0)
 	{
 		i /= 16;
@@ -124,7 +104,5 @@ int	convert_hex_lower(int n)
 			str[--i] = temp + 87;
 		n /= 16;
 	}
-	return (ft_putstr(str));
+	return (ft_print_str(str));
 }
-
-
