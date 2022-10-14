@@ -6,11 +6,11 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 14:23:03 by revieira          #+#    #+#             */
-/*   Updated: 2022/10/14 15:20:00 by revieira         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:41:49 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int	ft_putnbr_unsigned(unsigned int n)
 {

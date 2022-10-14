@@ -6,11 +6,11 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 15:39:28 by revieira          #+#    #+#             */
-/*   Updated: 2022/10/14 15:34:02 by revieira         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:41:39 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int	ft_print_char(char c)
 {
@@ -43,7 +43,7 @@ int	ft_print_point(unsigned long n)
 
 int	check_after_percent(const char *str, va_list ap)
 {
-	int		bytes_writes;
+	int	bytes_writes;
 
 	bytes_writes = 0;
 	if (*str == 'c')
@@ -85,20 +85,3 @@ int	ft_printf(const char *format, ...)
 	}
 	return (bytes_writes);
 }
-
-/*int	main(void)
-{
-	int		i1;
-	int		i2;
-	int		c;
-	char	*p;
-	char	*str;
-
-	p = (char *)malloc(sizeof(char));
-	str = NULL;
-	c = 'd';
-	i1 = ft_printf("num: %p\n", p);
-	i2 = printf("num: %p\n", p);
-	printf("minha função: %d\nFunção orginal: %d", i1, i2);
-	return (0);
-}*/
