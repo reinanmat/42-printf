@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 15:37:37 by revieira          #+#    #+#             */
-/*   Updated: 2022/10/17 13:20:07 by revieira         ###   ########.fr       */
+/*   Updated: 2022/10/18 15:32:53 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ int	ft_printf(const char *format, ...);
 int	check_valided_specifier(char c, const char *format);
 int	check_after_percent(char spec, va_list args);
 int	print_char(char c);
-int	print_point(unsigned long n);
+int	print_point(unsigned long long n);
 int	print_str(char *str);
 int	putnbr_base(long long n, char *base);
+int	unsigned_putnbr(unsigned long long n, char *base);
 int	ft_strlen(char *str);
 
 #endif
