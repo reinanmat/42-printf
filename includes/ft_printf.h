@@ -16,21 +16,18 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-# include <stdio.h>
 
-# define FORMATS		"cspdiuxX%"
-# define BASE_DEC		"0123456789"
-# define BASE_HEX_LOW	"0123456789abcdef"
+# define SPECS          "cspdiuxX%"
+# define BASE_DEC	    "0123456789"
+# define BASE_HEX_LOW   "0123456789abcdef"
 # define BASE_HEX_UPP	"0123456789ABCDEF"
 
-int	ft_printf(const char *format, ...);
-int	check_valided_specifier(char c, const char *format);
-int	check_after_percent(char spec, va_list args);
-int	print_char(char c);
-int	print_point(unsigned long long n);
-int	print_str(char *str);
-int	putnbr_base(long long n, char *base);
-int	unsigned_putnbr(unsigned long long n, char *base);
-int	ft_strlen(char *str);
+int		ft_printf(const char *format, ...);
+int		ft_print_char(char c);
+int		ft_print_str(char *str);
+int		ft_print_point(unsigned long long n);
+int		ft_putnbr_base(long long n, char *base);
+int		ft_putnbr_pos(unsigned long long n, char *base);
+size_t	ft_strlen(char *str);
 
 #endif

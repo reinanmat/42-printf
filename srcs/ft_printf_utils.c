@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-int	ft_strlen(char	*str)
+size_t	ft_strlen(char *str)
 {
 	int	len;
 
@@ -22,7 +22,7 @@ int	ft_strlen(char	*str)
 	return (len);
 }
 
-int	putnbr_base(long long n, char *base)
+int	ft_putnbr_base(long long n, char *base)
 {
 	int	bytes_writes;
 	int	len_base;
@@ -31,19 +31,20 @@ int	putnbr_base(long long n, char *base)
 	bytes_writes = 0;
 	if (n < 0)
 	{
-		bytes_writes += print_char('-');
+		bytes_writes += ft_print_char('-');
 		n *= -1;
 	}
 	if (n < len_base)
-		bytes_writes += print_char(base[n]);
+		bytes_writes += ft_print_char(base[n]);
 	else
 	{
-		bytes_writes += putnbr_base(n / len_base, base);
-		bytes_writes += putnbr_base(n % len_base, base);
+		bytes_writes += ft_putnbr_base(n / len_base, base);
+		bytes_writes += ft_putnbr_base(n % len_base, base);
 	}
 	return (bytes_writes);
 }
-int	unsigned_putnbr(unsigned long long n, char *base)
+
+int	ft_putnbr_pos(unsigned long long n, char *base)
 {
 	int					bytes_writes;
 	unsigned long long	len_base;
@@ -51,22 +52,22 @@ int	unsigned_putnbr(unsigned long long n, char *base)
 	len_base = ft_strlen(base);
 	bytes_writes = 0;
 	if (n < len_base)
-		bytes_writes += print_char(base[n]);
+		bytes_writes += ft_print_char(base[n]);
 	else
 	{
-		bytes_writes += putnbr_base(n / len_base, base);
-		bytes_writes += putnbr_base(n % len_base, base);
+		bytes_writes += ft_putnbr_base(n / len_base, base);
+		bytes_writes += ft_putnbr_base(n % len_base, base);
 	}
 	return (bytes_writes);
 }
 
-int	print_point(unsigned long long n)
+int	ft_print_point(unsigned long long n)
 {
 	int	bytes_writes;
 
 	if (!n)
-		return (print_str("(nil)"));
-	bytes_writes = print_str("0x");
-	bytes_writes += unsigned_putnbr(n, BASE_HEX_LOW);
+		return (ft_print_str("(nil)"));
+	bytes_writes = ft_print_str("0x");
+	bytes_writes += ft_putnbr_pos(n, BASE_HEX_LOW);
 	return (bytes_writes);
 }
