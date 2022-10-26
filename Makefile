@@ -22,7 +22,7 @@ $(NAME) : $(OBJS)
 	ar rc $(NAME) $(OBJS)
 
 $(OBJS) : $(SRCS)
-	$(CFLAGS) -I $(INCLUDES) -c $(SRCS)
+	$(CFLAGS) -I $(INCLUDES) -c $< -o $@
 
 clean :
 	rm -f $(OBJS)
