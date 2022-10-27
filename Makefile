@@ -11,17 +11,18 @@
 # **************************************************************************** #
 
 NAME 		= libftprintf.a
-INCLUDES	= $(addprefix includes/,ft_printf.h)
-SRCS 		= $(addprefix srcs/,ft_printf.c ft_printf_utils.c)
+INCLUDES	= ./includes
+PATH_SRC	= ./srcs/
+SRCS 		= $(addprefix $(PATH_SRC),ft_printf.c ft_printf_utils.c)
 OBJS 		= ft_printf.o ft_printf_utils.o
 CFLAGS 		= cc -Wall -Werror -Wextra
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	ar rc $(NAME) $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
-$(OBJS) : $(SRCS)
+%.o : $(PATH_SRC)%.c
 	$(CFLAGS) -I $(INCLUDES) -c $< -o $@
 
 clean :
