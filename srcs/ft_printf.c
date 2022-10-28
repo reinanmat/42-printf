@@ -55,7 +55,7 @@ static int	check_after_percent(char specifier, va_list ap)
 	else if (specifier == 'd' || specifier == 'i')
 		bytes_writes = ft_putnbr_base(va_arg(ap, int), BASE_DEC);
 	else if (specifier == 'p')
-		bytes_writes = ft_print_point(va_arg(ap, unsigned long));
+		bytes_writes = ft_print_point(va_arg(ap, unsigned long long));
 	else if (specifier == 'u')
 		bytes_writes = ft_putnbr_pos(va_arg(ap, unsigned int), BASE_DEC);
 	else if (specifier == 'x')
